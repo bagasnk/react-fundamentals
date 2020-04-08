@@ -20,10 +20,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>HELLO BAGAS</h1>
+      <h1>HELLO WORLD !!</h1>
       <h2 style={{ border: '1px solid red', marginTop: '30px' }}>Test Styling</h2>
       {/* {renderArr()}   */}
-      {/* <TableProduct />     */}
+      <TableProduct/>    
     </div>
   )
 }
