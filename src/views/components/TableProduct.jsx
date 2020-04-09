@@ -8,10 +8,10 @@ const TableProduct = () => {
     ]
 
     const renderArr = () => {
-        return arr.map(val => {
+        return arr.map((val,index) => {
             return (
                 <tr>
-                    <th>{arr.indexOf(val) + 1}</th>
+                    <th>{index+1}</th>
                     <th>{val.nama}</th>
                     <th>{val.pekerjaan}</th>
                 </tr>
