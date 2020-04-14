@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import NewScreen from './views/screens/NewScreen'
 import TableProduct from './views/components/TableProduct'
 import CounterScreen from './views/screens/CounterScreen'
+import InputScreen from './views/screens/InputScreen'
+import Ex14AprilScreen from './views/screens/Ex14AprilScreen'
 import ProductCard from './views/components/ProductCard'
 import ProductBooks from './views/components/ProductBooks'
 import Brave from './brave.png'
@@ -94,7 +96,10 @@ function App() {
   return (
     <div className='App'>
       <h1>Hallo World</h1>
-      <div className='row'>{renderProduct()}</div>
+      {/* <div className='row'>{renderProduct()}</div> */}
+      {/* <CounterScreen /> */}
+      {/* <InputScreen /> */}
+      <Ex14AprilScreen />
     </div>
   )
 
