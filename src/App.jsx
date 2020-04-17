@@ -1,10 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+
 import logo from './logo.svg';
 import NewScreen from './views/screens/NewScreen'
 import TableProduct from './views/components/TableProduct'
 import CounterScreen from './views/screens/CounterScreen'
 import InputScreen from './views/screens/InputScreen'
-import Ex14AprilScreen from './views/screens/Ex14AprilScreen'
+import AuthScreen from './views/screens/AuthScreen'
+import Navbar from './views/components/Navbar'
+import ProfileScreen from './views/screens/ProfileScreen'
+import PageNotFound from './views/screens/PageNotFound'
+import LifecycleScreen from './views/screens/LifecycleScreen'
+import HomeScreen from './views/screens/HomeScreen'
 import ProductCard from './views/components/ProductCard'
 import ProductBooks from './views/components/ProductBooks'
 import Brave from './brave.png'
@@ -14,8 +21,19 @@ import Handmaid from './handmaid.png'
 import 'font-awesome/css/font-awesome.min.css';
 
 
+//Weekendtask !
+import RegisterScreen from './views/screens/RegisterScreen'
+import LoginScreen from './views/screens/LoginScreen'
+
+//--------------------------------------------------------------
+
+
+
+
+
 
 import './App.css';
+import ProfileScreen1 from './views/screens/ProfileScreen1';
 
 function App() {
   // let arr = ['Bandung', 'Jakarta', 'Tanggerang', 'Papua']
@@ -94,13 +112,42 @@ function App() {
   }
 
   return (
-    <div className='App'>
-      <h1>Hallo World</h1>
-      {/* <div className='row'>{renderProduct()}</div> */}
-      {/* <CounterScreen /> */}
-      {/* <InputScreen /> */}
-      <Ex14AprilScreen />
-    </div>
+    // <div className='App'>
+    //   <h1>Hallo World</h1>
+    // {/* <div className='row'>{renderProduct()}</div> */}
+    // {/* <CounterScreen /> */}
+    // {/* <InputScreen /> */}
+    // {/* <AuthScreen /> */}
+    // {/* <LifecycleScreen /> */}
+    // </div>
+    // <BrowserRouter>
+    //   <Navbar />
+
+    //   <Switch>
+    //     <Route exact path='/' component={HomeScreen} />
+    //     <Route exact path='/auth' component={AuthScreen} />
+    //     <Route exact path='/input' component={InputScreen} />
+    //     <Route exact path='/counter' component={CounterScreen} />
+    //     <Route exact path='/profile/:username' component={ProfileScreen} />
+    //     <Route exact path='*' component={PageNotFound} />
+    //   </Switch>
+    // </BrowserRouter>
+
+
+    <BrowserRouter>
+      <Navbar />
+
+      <Switch>
+        <Route exact path='/' component={HomeScreen} />
+        <Route exact path='/register' component={RegisterScreen} />
+        <Route exact path='/login' component={LoginScreen} />
+        <Route exact path='/profile/:username' component={ProfileScreen1} />
+        
+        <Route exact path='/counter' component={CounterScreen} />
+        {/* <Route exact path='/profile/:username' component={ProfileScreen} /> */}
+        <Route exact path='*' component={PageNotFound} />
+      </Switch>
+    </BrowserRouter>
   )
 
   // const renderProduct = () => {
@@ -138,4 +185,4 @@ function App() {
   )
 }
 
-export default App;
+export default withRouter(App);

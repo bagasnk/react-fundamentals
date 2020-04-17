@@ -1,0 +1,41 @@
+{
+  "posts": [],
+  "comments": [],
+  "users": [
+    {
+      "username": "bagas",
+      "fullName": "Bagas Yafitra Pandji",
+      "password": "123",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "username": "Ilham",
+      "fullName": "Ilham Faezar",
+      "password": "asd",
+      "role": "member",
+      "id": 2
+    },
+    {
+      "username": "jonson",
+      "fullName": "jonson",
+      "password": "asd",
+      "role": "asd",
+      "id": 3
+    },
+    {
+      "username": "abdul",
+      "fullName": "asd",
+      "password": "asd",
+      "role": "admin",
+      "id": 4
+    },
+    {
+      "username": "mamad",
+      "fullName": "mamad",
+      "password": "asd",
+      "role": "member",
+      "id": 5
+    }
+  ]
+}
