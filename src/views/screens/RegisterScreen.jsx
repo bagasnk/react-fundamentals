@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Axios from 'axios'
 import { API_URL } from '../../constants/API'
+import { Spinner } from 'reactstrap'
 
 class RegisterScreen extends React.Component {
     state = {
@@ -10,6 +11,7 @@ class RegisterScreen extends React.Component {
         password: "",
         role: "",
         users: [],
+        isLoading: false,
     }
 
     inputHandler = (e, field) => {
@@ -18,36 +20,53 @@ class RegisterScreen extends React.Component {
 
     postDataHandler = () => {
         const { username, fullName, password, role } = this.state;
-        Axios.get(`${API_URL}/users`, {
-            params: {
-                username: `${username}`
-            }
-        })
-            .then((res) => {
-                if (username && fullName && password && role != "") {
-                    if (res.data.length == 0) {
-                        alert('Berhasil Menambahkan akun')
-                        Axios.post(`${API_URL}/users`, {
-                            username: `${username}`,
-                            fullName: `${fullName}`,
-                            password: `${password}`,
-                            role: `${role}`,
-                        })
-                            .then((res) => {
-                                console.log(res)
-                            })
-                            .catch((err) => {
-                                console.log(err)
-                            })
+        this.setState({ isLoading: true });
+        setTimeout(() => {
+            Axios.get(`${API_URL}/users`, {
+                params: {
+                    username: `${username}`
+                }
+            })
+                .then((res) => {
+                    if (username && fullName && password && role != "") {
+                        if (res.data.length == 0) {
+                            alert('Berhasil Menambahkan akun')
+                            Axios.post(`${API_URL}/users`, {
+                                username: `${username}`,
+                                fullName: `${fullName}`,
+                                password: `${password}`,
+                                role: `${role}`,
 
-                        this.setState({
-                            username: "",
-                            fullName: "",
-                            password: "",
-                            role: "",
-                        });
+                            })
+                                .then((res) => {
+                                    console.log(res)
+                                    this.setState({ isLoading: false });
+                                })
+                                .catch((err) => {
+                                    console.log(err)
+                                    this.setState({ isLoading: false });
+                                })
+
+                            this.setState({
+                                username: "",
+                                fullName: "",
+                                password: "",
+                                role: "",
+                            });
+                        } else {
+                            alert('Username sudah terpakai')
+                            this.setState({ isLoading: false });
+                            this.setState({
+                                username: "",
+                                fullName: "",
+                                password: "",
+                                role: "",
+                            });
+                        }
+
                     } else {
-                        alert('Username sudah terpakai')
+                        alert('Input tidak boleh kosong')
+                        this.setState({ isLoading: false });
                         this.setState({
                             username: "",
                             fullName: "",
@@ -55,20 +74,12 @@ class RegisterScreen extends React.Component {
                             role: "",
                         });
                     }
-
-                } else {
-                    alert('username sudah terpakai')
-                    this.setState({
-                        username: "",
-                        fullName: "",
-                        password: "",
-                        role: "",
-                    });
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+                })
+                .catch((err) => {
+                    console.log(err)
+                    this.setState({ isLoading: false });
+                })
+        }, 1500);
     }
 
     render() {
@@ -113,15 +124,19 @@ class RegisterScreen extends React.Component {
                             placeholder="Role"
                             onChange={(e) => this.inputHandler(e, "role")}
                         />
-                        <input
-                            type="button"
-                            value="Register"
-                            className="btn btn-primary mt-3"
-                            onClick={this.postDataHandler}
-                        />
+                        {!this.state.isLoading ?
+                            <input
+                                type="button"
+                                value="Register"
+                                className="btn btn-primary mt-3"
+                                onClick={this.postDataHandler}
+                                disabled={this.state.isLoading}
+                            /> :
+                            <center><Spinner animation="border" color="danger" /></center>
+                        }
                     </div>
                 </center>
-            </div>
+            </div >
         )
     }
 }

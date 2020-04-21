@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class Navbar extends React.Component{
     render(){
@@ -10,9 +11,16 @@ class Navbar extends React.Component{
                 <Link to='/profile'>Profile</Link>
                 <Link to='/register'>Register</Link>
                 <Link to='/login'>Login</Link>
+                {this.props.user.username}
             </div>
         )
     }
 }
 
-export default Navbar;
+const mapStatetoProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStatetoProps)(Navbar);

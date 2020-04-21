@@ -36,6 +36,27 @@
       "password": "asd",
       "role": "member",
       "id": 5
+    },
+    {
+      "username": "kopong",
+      "fullName": "lukman abcd efg 123",
+      "password": "asd",
+      "role": "manager",
+      "id": 6
+    },
+    {
+      "username": "asss",
+      "fullName": "asd",
+      "password": "asd",
+      "role": "asd",
+      "id": 7
+    },
+    {
+      "username": "dawd",
+      "fullName": "dwdwd",
+      "password": "dwdwd",
+      "role": "wddw",
+      "id": 8
     }
   ]
 }

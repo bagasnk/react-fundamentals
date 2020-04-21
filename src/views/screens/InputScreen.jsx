@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class InputScreen extends React.Component {
   state = {
@@ -17,9 +18,12 @@ class InputScreen extends React.Component {
 
     return (
       <div>
+       <h1>    {this.props.todo.todoInput}</h1> 
+        
         <h1>Input Screen</h1>
         <h3>Username: {username} </h3>
         <h3>Email: {email} </h3>
+        
         <input
           onChange={(e) => this.inputHandler(e, "username")}
           // onChange={this.inputHandler}
@@ -44,9 +48,17 @@ class InputScreen extends React.Component {
         <Link to={'/profile/' + username}>
         <input type='button' className='btn btn-primary' value='Login' />
         </Link>
+
       </div>
     );
   }
 }
 
-export default InputScreen;
+const mapStatetoProps = state => {
+  return {
+      todo: state.todo
+  }
+}
+
+// export default InputScreen;
+export default connect(mapStatetoProps)(InputScreen);

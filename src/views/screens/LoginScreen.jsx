@@ -3,6 +3,9 @@ import { useRouteMatch } from 'react-router-dom'
 import Axios from 'axios'
 import { API_URL } from '../../constants/API'
 import { Link, Redirect } from "react-router-dom";
+import swal from "sweetalert";
+import { todoInputUserHandler } from '../../redux/actions'
+import { connect } from 'react-redux'
 
 class LoginScreen extends React.Component {
     state = {
@@ -18,7 +21,7 @@ class LoginScreen extends React.Component {
     }
 
     LoginDataHandler = () => {
-        const { username, password,currentUsername } = this.state
+        const { username, password } = this.state
         let condition = false
         Axios.get(`${API_URL}/users`, {
             params: {
@@ -35,15 +38,16 @@ class LoginScreen extends React.Component {
                     }
                 }
                 if (condition) {
-                    alert("Berhasil login")
+                    swal("Success!", "Berhasil berhasil hore", "success");
+                    this.props.onChangeUsername(username)
                     this.setState({
                         isLoggedIn: true,
                         username: "",
                         password: "",
-                        currentUsername:username,
+                        currentUsername: username,
                     });
                 } else {
-                    alert("Username dan Password tidak cocok / tidak ada")
+                    swal("Error!", "Username atau password salah", "error");
                     this.setState({
                         username: "",
                         password: "",
@@ -76,6 +80,8 @@ class LoginScreen extends React.Component {
                                 type="text"
                                 placeholder="Username"
                                 onChange={(e) => this.inputHandler(e, "username")}
+
+
                             />
                             <input
                                 value={password}
@@ -84,6 +90,7 @@ class LoginScreen extends React.Component {
                                 placeholder="Password"
                                 onChange={(e) => this.inputHandler(e, "password")}
                             />
+
                             <input
                                 type="button"
                                 value="Login"
@@ -94,12 +101,22 @@ class LoginScreen extends React.Component {
                     </center>
                 </div>
             );
-        }else{
+        } else {
             return <Redirect to={`/profile/${currentUsername}`} />
-          }
+        }
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
 
+const mapDispatchToProps = {
+    onChangeUsername: todoInputUserHandler,
 
-    export default LoginScreen;
+}
+
+// export default LoginScreen;
+export default connect(mapStateToProps,mapDispatchToProps)(LoginScreen)

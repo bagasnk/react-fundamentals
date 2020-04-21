@@ -10,6 +10,7 @@ import AuthScreen from './views/screens/AuthScreen'
 import Navbar from './views/components/Navbar'
 import ProfileScreen from './views/screens/ProfileScreen'
 import PageNotFound from './views/screens/PageNotFound'
+import TodoReduxScreen from './views/screens/TodoReduxScreen'
 import LifecycleScreen from './views/screens/LifecycleScreen'
 import HomeScreen from './views/screens/HomeScreen'
 import ProductCard from './views/components/ProductCard'
@@ -142,10 +143,11 @@ function App() {
         <Route exact path='/register' component={RegisterScreen} />
         <Route exact path='/login' component={LoginScreen} />
         <Route exact path='/profile/:username' component={ProfileScreen1} />
-        
-        <Route exact path='/counter' component={CounterScreen} />
+        <Route exact path='/todo' component={TodoReduxScreen} />
+        <Route exact path='/input' component={InputScreen} />
         {/* <Route exact path='/profile/:username' component={ProfileScreen} /> */}
         <Route exact path='*' component={PageNotFound} />
+        
       </Switch>
     </BrowserRouter>
   )
