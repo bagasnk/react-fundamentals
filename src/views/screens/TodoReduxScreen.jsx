@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { todoInputHandler,todoInputUserHandler,todoInputList, AddTodoHandler } from '../../redux/actions'
+import { todoInputHandler, todoInputUserHandler, LoginHandler, AddTodoHandler } from '../../redux/actions'
 
 class TodoReduxScreen extends React.Component {
     render() {
@@ -8,7 +8,8 @@ class TodoReduxScreen extends React.Component {
             <div>
                 <h1 className='container'></h1>
                 <h1>Todo Screen</h1>
-                <input type="text"
+
+                {/* <input type="text"
                     className="form-control"
                     placeholder="Input Todo handler"
                     onChange={(e) => this.props.onChangeTodo(e.target.value)}
@@ -20,7 +21,15 @@ class TodoReduxScreen extends React.Component {
                 />
                 {this.props.todo.todoList.map((val) => {
                     return <p>{val}</p>
-                })}
+                })} */}
+                {/* <p>Testing 1: {this.props.user.testing}</p>
+                <p>Testing 2: {this.props.user.testing2}</p>
+                <input 
+                    type="button"
+                    value="Testing"
+                    className="btn btn-success"
+                    onClick={this.props.onLogin} 
+                /> */}
             </div>
         )
     }
@@ -36,7 +45,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     onChangeTodo: todoInputHandler,
     onChangeUsername: todoInputUserHandler,
-    onAddTodo: AddTodoHandler
+    onAddTodo: AddTodoHandler,
+    onLogin: LoginHandler
 }
 
-export default connect(mapStateToProps,mapDispatchToProps) (TodoReduxScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoReduxScreen)
