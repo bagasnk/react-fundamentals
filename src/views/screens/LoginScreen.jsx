@@ -6,7 +6,10 @@ import { Link, Redirect } from "react-router-dom";
 import swal from "sweetalert";
 import { todoInputUserHandler, LoginHandler } from '../../redux/actions'
 import { connect } from 'react-redux'
+import Cookie from 'universal-cookie'
 
+
+const cookiesObject = new Cookie();
 
 class LoginScreen extends React.Component {
     state = {
@@ -28,6 +31,10 @@ class LoginScreen extends React.Component {
             password,
         };
         this.props.onLogin(userData)
+        this.setState({username:""})
+        this.setState({password:""})
+
+
         //     let condition = false
         //     Axios.get(`${API_URL}/users`, {
         //         params: {
@@ -65,6 +72,11 @@ class LoginScreen extends React.Component {
         //         })
     }
 
+    componentDidUpdate(){
+        if(this.props.user.id){
+          cookiesObject.set("authData", JSON.stringify(this.props.user))
+        }
+      }
 
     render() {
         const {
@@ -74,7 +86,7 @@ class LoginScreen extends React.Component {
             currentUsername,
         } = this.state;
 
-        if (!isLoggedIn) {
+        // if (!this.props.user.id) {
             return (
                 <div>
                     <center className="container">
@@ -109,9 +121,9 @@ class LoginScreen extends React.Component {
                     </center>
                 </div>
             );
-        } else {
-            return <Redirect to={`/profile/${currentUsername}`} />
-        }
+        // } else {
+        //     return <div>...</div>
+        // }
     }
 }
 

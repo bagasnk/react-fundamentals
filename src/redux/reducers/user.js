@@ -1,6 +1,6 @@
 const init_state = {
     id: 0,
-    username: "bagas",
+    username: "",
     fullName: "",
     role: "",
     errMsg: "",
@@ -37,6 +37,16 @@ export default (state = init_state, action) => {
         };
     } else if (action.type === "ON_REGISTER_FAIL") {
         return { ...state, errMsg: action.payload }
+    } else if (action.type === "ON_LOGOUT"){
+        return {
+            ...state,
+            username: action.payload,
+            fullName : action.payload,
+            role : action.payload,
+            password : action.payload,
+            id : action.payload,
+            errMsg : "Berhasil Logout"
+        };
     }
     return { ...state };
 }
